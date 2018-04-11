@@ -43,8 +43,9 @@ public class Main {
      * This function uses MergeSort to sort the arrayList.
      * @param arrayList the ArrayList to be sorted. arrayList cannot contain duplicates
      */
-    public static void mergeSort(ArrayList<Integer> arrayList) {
-        throw new UnsupportedOperationException("mergeSort() has not been implemented yet");
+    public static void mergeSort(ArrayList<Integer> arrayList)
+    {
+        sort(ArrayList, 0, ArrayList.size());
     }
 
     /**
