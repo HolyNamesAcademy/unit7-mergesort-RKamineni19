@@ -1,5 +1,3 @@
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.ArrayList;
 
 public class Main {
@@ -13,8 +11,23 @@ public class Main {
      * This function uses selection sort to sort the arrayList.
      * @param arrayList the ArrayList to be sorted. arrayList cannot contain duplicates
      */
-    public static void selectionSort(ArrayList<Integer> arrayList) {
-        throw new UnsupportedOperationException("SelectionSort() has not been implemented yet");
+    public static void selectionSort(ArrayList<Integer> arrayList)
+    {
+        for(int i = 0; i < arrayList.size(); i++)
+        {
+            int tempmin = i;
+            for (int z = i+1; z < arrayList.size(); z++)
+            {
+                if (arrayList.get(z) < tempmin)
+                {
+                    tempmin = z;
+                }
+            }
+            int minimum = arrayList.get(tempmin);
+            arrayList.set(i, arrayList.get(tempmin));
+            arrayList.set(tempmin, minimum);
+
+        }
     }
 
     /**
@@ -45,7 +58,7 @@ public class Main {
      */
     public static void mergeSort(ArrayList<Integer> arrayList)
     {
-        sort(ArrayList, 0, ArrayList.size());
+        sort(arrayList, 0, arrayList.size());
     }
 
     /**
@@ -57,8 +70,15 @@ public class Main {
      * @param lo the index of the first element in the range
      * @param hi the index of the last element in the range + 1.
      */
-    public static void sort(ArrayList<Integer> arrayList, int lo, int hi) {
-        throw new UnsupportedOperationException("sort() has not been implemented yet");
+    public static void sort(ArrayList<Integer> arrayList, int lo, int hi)
+    {
+        if(hi-lo <= 1)
+            return;
+
+        int mid = (hi+lo)/2;
+            sort(arrayList, lo, mid);
+            sort(arrayList, mid, hi);
+            merge(arrayList, lo, mid, hi);
     }
 
     /**
@@ -71,7 +91,32 @@ public class Main {
      * @param mid the boundary point of the two ranges. arrayList[mid] is in the second range.
      * @param hi the index of the last element in the second range + 1.
      */
-    public static void merge(ArrayList<Integer> arrayList, int lo, int mid, int hi) {
-        throw new UnsupportedOperationException("merge() has not been implemented yet");
-    }
+    public static void merge(ArrayList<Integer> arrayList, int lo, int mid, int hi)
+    {
+        ArrayList<Integer> tempArray = new ArrayList<Integer>();
+        int i = lo;
+        int j = mid;
+        for(int f = 0; f < hi; f++)
+        {
+            if(j == hi)
+            {
+                tempArray.add(arrayList.get(i));
+                i++;
+            }
+            else if(i == mid)
+            {
+                tempArray.add(arrayList.get(j));
+                j++;
+            }
+            else if(arrayList.get(j) < arrayList.get(i))
+            {
+                tempArray.add(arrayList.get(j));
+                j++;
+            }   
+            else
+            {
+                tempArray.add(arrayList.get(i));
+                i++;
+            }
+        }
 }
