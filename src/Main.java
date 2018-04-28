@@ -13,20 +13,19 @@ public class Main {
      */
     public static void selectionSort(ArrayList<Integer> arrayList)
     {
-        for(int i = 0; i < arrayList.size(); i++)
+        for(int i = 0; i < arrayList.size()-1; i++)
         {
             int tempmin = i;
             for (int z = i+1; z < arrayList.size(); z++)
             {
-                if (arrayList.get(z) < tempmin)
+                if (arrayList.get(z) < arrayList.get(tempmin))
                 {
                     tempmin = z;
                 }
             }
             int minimum = arrayList.get(tempmin);
-            arrayList.set(i, arrayList.get(tempmin));
-            arrayList.set(tempmin, minimum);
-
+            arrayList.set(tempmin, arrayList.get(i));
+            arrayList.set(i, minimum);
         }
     }
 
@@ -37,7 +36,14 @@ public class Main {
      * @param value the value we are looking for in the array list
      */
     public static int linearSearch(ArrayList<Integer> arrayList, int value) {
-        throw new UnsupportedOperationException("LinearSearch() has not been implemented yet");
+        for(int i = 0; i < arrayList.size(); i++)
+        {
+            if(arrayList.get(i) == value)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -47,8 +53,27 @@ public class Main {
      *                  IN SORTED ORDER. arrayList cannot contain duplicates
      * @param value the value we are looking for in the array list
      */
-    public static int binarySearch(ArrayList<Integer> arrayList, int value) {
-        throw new UnsupportedOperationException("LinearSearch() has not been implemented yet");
+    public static int binarySearch(ArrayList<Integer> arrayList, int value)
+    {
+        int hi = arrayList.size()-1;
+        int lo = 0;
+        while(hi>=lo)
+        {
+            int mid = hi+lo/2;
+            if(arrayList.get(mid) == value)
+            {
+                return mid;
+            }
+            else if(arrayList.get(mid) < value)
+            {
+                lo = (hi-lo)/2;
+            }
+            else if(arrayList.get(mid) > value)
+            {
+                hi = mid/2;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -96,27 +121,25 @@ public class Main {
         ArrayList<Integer> tempArray = new ArrayList<Integer>();
         int i = lo;
         int j = mid;
-        for(int f = 0; f < hi; f++)
-        {
-            if(j == hi)
-            {
+        for(int f = 0; f < hi; f++) {
+            if (j == hi) {
+                tempArray.add(arrayList.get(i));
+                i++;
+            } else if (i == mid) {
+                tempArray.add(arrayList.get(j));
+                j++;
+            } else if (arrayList.get(j) < arrayList.get(i)) {
+                tempArray.add(arrayList.get(j));
+                j++;
+            } else {
                 tempArray.add(arrayList.get(i));
                 i++;
             }
-            else if(i == mid)
-            {
-                tempArray.add(arrayList.get(j));
-                j++;
-            }
-            else if(arrayList.get(j) < arrayList.get(i))
-            {
-                tempArray.add(arrayList.get(j));
-                j++;
-            }   
-            else
-            {
-                tempArray.add(arrayList.get(i));
-                i++;
+        }
+            for (int index = 0; index < tempArray.size(); index++) {
+
+                arrayList.set(index + lo, tempArray.get(index));
+
             }
         }
 }
