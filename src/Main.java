@@ -66,11 +66,11 @@ public class Main {
             }
             else if(arrayList.get(mid) < value)
             {
-                lo = (hi-lo)/2;
+                lo = mid+1;
             }
             else if(arrayList.get(mid) > value)
             {
-                hi = mid/2;
+                hi = mid-1;
             }
         }
         return -1;
